@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".moonDisplay">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/headingPage2"
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:background="#9AD69C"
+            android:gravity="center"
+            android:text="Phase of Moon"
+            android:textSize="34sp" />
+
+        <ImageView
+            android:id="@+id/moonImage"
+            android:layout_width="match_parent"
+            android:layout_height="531dp"
+            android:background="#BBE8ED"
+            app:srcCompat="@drawable/new_moon" />
+
+        <TextView
+            android:id="@+id/nameOfPhase"
+            android:layout_width="match_parent"
+            android:layout_height="122dp"
+            android:gravity="center"
+            android:text="Select Date on Previous Page"
+            android:textSize="34sp" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
