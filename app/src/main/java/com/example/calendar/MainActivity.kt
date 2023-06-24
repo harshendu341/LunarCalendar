@@ -9,6 +9,7 @@ import android.widget.CalendarView
 import android.widget.CalendarView.OnDateChangeListener
 import android.widget.TextView
 
+
 class MainActivity : AppCompatActivity() {
     // on below line we are creating
     // variables for text view and calendar view
@@ -16,11 +17,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var calendarView: CalendarView
     lateinit var moonShape : TextView
     lateinit var nextPage : Button
+    lateinit var saveEvent : Button
+    lateinit var events : TextView
+    lateinit var eventName : TextView
+    lateinit var dtc: String
     var dateMessage: String? = null
+    val eventlist= mutableMapOf<String,String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         // initializing variables of
         // list view with their ids.
         var sendDate = "11/8/1999"
@@ -28,10 +33,15 @@ class MainActivity : AppCompatActivity() {
         calendarView = findViewById(R.id.calendarView)
         moonShape = findViewById(R.id.phaseView)
         nextPage = findViewById(R.id.moonDisplay)
+        saveEvent = findViewById(R.id.saveEvent)
+        events= findViewById(R.id.events)
+        eventName = findViewById(R.id.eventName)
+
         val monthMap = arrayOf("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
         val moonPhases = arrayOf("New Moon", "Waxing Crescent", "First Quarter", "Waxing Gibbous", "Full Moon", "Waning Gibbous", "Last Quarter", "Waning Crescent")
         // on below line we are adding set on
         // date change listener for calendar view.
+        val calen=Calendar.getInstance()
         calendarView
             .setOnDateChangeListener(
                 OnDateChangeListener { view, year, month, dayOfMonth ->
@@ -47,8 +57,9 @@ class MainActivity : AppCompatActivity() {
                     numOfDays(sendDate, moonPhases)
                     // set this date in TextView for Display
                     dateTV.setText(Date)
-                })
+                    events.text=eventlist[Date]
 
+                })
         nextPage.setOnClickListener({
             intent= Intent(this,moonDisplay::class.java)
             val bundle=Bundle()
@@ -57,6 +68,14 @@ class MainActivity : AppCompatActivity() {
             intent.putExtras(bundle)
             startActivity(intent)
         })
+
+        saveEvent.setOnClickListener({
+            val txt= eventName.text.toString()
+            val dt=dateTV.text.toString()
+            eventlist[dt]=txt
+            events.text=txt
+            eventName.text=""
+          })
     }
 
     fun numOfDays(sendDate: String, moonPhases: Array<String>){
@@ -85,4 +104,5 @@ class MainActivity : AppCompatActivity() {
         else if(23.147941 < moonAge && moonAge <= 28.530588)
             moonShape.text = moonPhases[7]
     }
+
 }
